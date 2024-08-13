@@ -42,7 +42,6 @@ use Rubel9997\MultiFileLogger\Loggers\JsonFileLogger;
 // $logger = new StreamLogger('php://stdout');
 // $logger->log('info', 'This message is written to the console.');
 
-
 $manager = new LogManager([
     'text' => ['path' => 'logs/text-log.txt'],
     'stream' => ['path' => 'php://stdout'],

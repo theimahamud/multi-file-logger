@@ -8,7 +8,7 @@ class LogManager extends Manager
 {
     function getDefaultDriver()
     {
-        return 'stream';
+        return 'textFile';
     }
 
     function createStreamDriver(): LoggerInterface

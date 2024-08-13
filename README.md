@@ -1,20 +1,12 @@
-# This is my package multi-file-logger
+# This is a multi-file-logger package
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/rubel9997/multi-file-logger.svg?style=flat-square)](https://packagist.org/packages/rubel9997/multi-file-logger)
 [![Tests](https://img.shields.io/github/actions/workflow/status/rubel9997/multi-file-logger/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/rubel9997/multi-file-logger/actions/workflows/run-tests.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/rubel9997/multi-file-logger.svg?style=flat-square)](https://packagist.org/packages/rubel9997/multi-file-logger)
 
-This is where your description should go. Try and limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/multi-file-logger.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/multi-file-logger)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
-
-## Installation
+Multi-File Logger is a versatile PHP package designed to handle logging across multiple channels and formats. It provides a flexible logging solution that supports various logging mediums, including text files, JSON files, and databases.
+This package is ideal for projects that require extensive logging capabilities, enabling you to manage and store logs in different formats and locations efficiently.
+## Installation For PHP 
 
 You can install the package via composer:
 
@@ -22,11 +14,48 @@ You can install the package via composer:
 composer require rubel9997/multi-file-logger
 ```
 
+## Database Setup
+
+First, create a logs table in your database using the following SQL statement:
+
+```php
+CREATE TABLE logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    level VARCHAR(20),
+    message TEXT,
+    context JSON,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
 ## Usage
 
 ```php
-$skeleton = new Rubel9997\MultiFileLogger();
-echo $skeleton->echoPhrase('Hello, Rubel9997!');
+use Rubel9997\MultiFileLogger\Loggers\LogManager;
+
+// Load the configuration
+//$config = require __DIR__ . '/config/logger.php';
+
+// Instantiate the LogManager
+//$manager = new LogManager($config);
+
+$manager = new LogManager([
+    'text' => ['path' => 'logs/text-log.txt'],
+    'stream' => ['path' => 'php://stdout'],
+    'json' => ['path' => 'logs/json-log.json'],
+    'database' => [
+        'db' => 'logger',
+        'username' => 'root',
+        'password' => '',
+        'table' => 'logs',
+    ],
+]);
+
+// Log messages to different channels
+$manager->driver('textFile')->log('info', 'This is a log message in a text file.');
+$manager->driver('jsonFile')->log('info', 'This is a log message in JSON format.');
+$manager->driver('stream')->log('info', 'This is a log message to stdout.');
+$manager->driver('database')->log('info', 'This is a log message stored in the database.');
 ```
 
 ## Testing
@@ -35,17 +64,44 @@ echo $skeleton->echoPhrase('Hello, Rubel9997!');
 composer test
 ```
 
-## Changelog
+## Installation For Laravel 
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+You can install the package via Composer:
 
-## Contributing
+```bash
+composer require rubel9997/multi-file-logger
+```
 
-Please see [CONTRIBUTING](https://github.com/spatie/.github/blob/main/CONTRIBUTING.md) for details.
+After installing the package, you can publish the configuration file to customize the logging channels:
 
-## Security Vulnerabilities
+```php
+php artisan vendor:publish --provider="Rubel9997\MultiFileLogger\Loggers\LoggerServiceProvider" --tag="logger-config"
 
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+```
+
+## Database Setup
+```php
+php artisan vendor:publish --provider="Rubel9997\MultiFileLogger\Loggers\LoggerServiceProvider" --tag="logger-migration"
+php artisan migrate
+```
+
+## Usage
+
+```php
+use Rubel9997\MultiFileLogger\Loggers\LogManager;
+use Rubel9997\MultiFileLogger\Loggers\Facades\LogFacade;
+
+//use facade for store log
+LogFacade::log('info', 'facade log');
+
+//use LogManager class for store log
+$manager = app(LogManager::class);
+$manager->driver('textFile')->log('info', 'Log Message store.');
+$manager->driver('jsonFile')->log('info', 'Log Message store.');
+$manager->driver('stream')->log('info', 'Log Message store.');
+$manager->driver('database')->log('info', 'Log Message store.');
+```
+
 
 ## Credits
 

@@ -7,15 +7,6 @@
     ],
     "homepage": "https://github.com/rubel9997/multi-file-logger",
     "license": "MIT",
-    "repositories": {
-        "local": {
-            "type": "path",
-            "url": "./package/*",
-            "options": {
-                "symlink": true
-            }
-        }
-    },
     "authors": [
         {
             "name": "Rubel Mahamud",

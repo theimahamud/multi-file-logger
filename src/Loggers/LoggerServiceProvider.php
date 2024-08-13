@@ -13,17 +13,25 @@ class LoggerServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../../config/logger.php', 'logger');
 
-        $this->app->singleton('log-manager', function ($app) {
-            return new LogManager($this->app['config']['logger']['drivers']);
-        });
+
+        $bindLogManager = function ($app) {
+            return new LogManager($app['config']['logger']['drivers']);
+        };
+
+        $this->app->singleton('log-manager', $bindLogManager);
+
+        $this->app->bind(LogManager::class, $bindLogManager);
     }
 
     public function boot()
     {
         $this->publishes([
             __DIR__ . '/../../config/logger.php' => config_path('logger.php'),
-        ], 'config');
+        ], 'logger-config');
 
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $timestamp = date('Y_m_d_His');
+        $this->publishes([
+            __DIR__ . '/../../database/migrations/create_logs_table.php' => database_path('migrations/' . $timestamp . '_create_logs_table.php'),
+        ], 'logger-migration');
     }
 }

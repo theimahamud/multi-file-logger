@@ -12,9 +12,9 @@ return new class extends Migration {
     {
         Schema::create('logs', function (Blueprint $table) {
             $table->id();
-            $table->string('level')->nullable();
-            $table->string('message')->nullable();
-            $table->string('context')->nullable();
+            $table->string('level');
+            $table->text('message');
+            $table->json('context')->nullable();
             $table->timestamps();
         });
     }

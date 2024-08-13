@@ -13,12 +13,12 @@ return [
     |
     */
 
-    'default' => env('LOGGER_DEFAULT', 'text'),
+    'default' => 'textFile',
 
     'drivers' => [
 
         'text' => [
-            'path' => 'logs/text-log.txt',
+            'path' => storage_path('logs/text-log.txt'),
         ],
 
         'stream' => [
@@ -26,7 +26,7 @@ return [
         ],
 
         'json' => [
-            'path' => 'logs/json-log.json',
+            'path' => storage_path('logs/json-log.json'),
         ],
 
         'database' => [
