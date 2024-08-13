@@ -2,15 +2,13 @@
 
 require 'vendor/autoload.php';
 
-
-use Rubel9997\MultiFileLogger\Loggers\LogManager;
-use Rubel9997\MultiFileLogger\Loggers\TextFileLogger;
-use Rubel9997\MultiFileLogger\Loggers\StreamLogger;
 use Rubel9997\MultiFileLogger\Loggers\JsonFileLogger;
+use Rubel9997\MultiFileLogger\Loggers\LogManager;
+use Rubel9997\MultiFileLogger\Loggers\StreamLogger;
+use Rubel9997\MultiFileLogger\Loggers\TextFileLogger;
 
 // $logger = new TextFileLogger('logs/text-log.txt');
 // $logger->log('info', 'This is a log message');
-
 
 // $stream = fopen('logs/text-log.txt', 'a');
 
@@ -22,7 +20,6 @@ use Rubel9997\MultiFileLogger\Loggers\JsonFileLogger;
 
 // $logger = new JsonFileLogger('logs/json-log.json');
 // $logger->log('info', 'This is a log message of json data');
-
 
 //$dsn = 'mysql:host=localhost;dbname=logger;charset=utf8mb4';
 //$username = 'root';
@@ -41,7 +38,6 @@ use Rubel9997\MultiFileLogger\Loggers\JsonFileLogger;
 
 // $logger = new StreamLogger('php://stdout');
 // $logger->log('info', 'This message is written to the console.');
-
 
 $manager = new LogManager([
     'text' => ['path' => 'logs/text-log.txt'],

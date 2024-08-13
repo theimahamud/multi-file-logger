@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Rubel9997\MultiFileLogger\Loggers;
 
-use Rubel9997\MultiFileLogger\Loggers\AbstractLogger;
-
 class TextFileLogger extends AbstractLogger
 {
     protected $filePath;
