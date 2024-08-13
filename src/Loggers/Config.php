@@ -9,7 +9,9 @@ use PDO;
 class Config
 {
     public $uri;
+
     public $username;
+
     public $password;
 
     public function __construct(string $uri, string $username = '', string $password = '')
@@ -24,7 +26,7 @@ class Config
         return $this->uri;
     }
 
-    function getPDO()
+    public function getPDO()
     {
         return new PDO($this->uri, $this->username, $this->password, [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

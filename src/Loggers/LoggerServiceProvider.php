@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Rubel9997\MultiFileLogger\Loggers;
 
 use Illuminate\Support\ServiceProvider;
-use PDO;
 
 class LoggerServiceProvider extends ServiceProvider
 {

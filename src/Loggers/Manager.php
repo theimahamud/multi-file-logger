@@ -3,12 +3,11 @@
 namespace Rubel9997\MultiFileLogger\Loggers;
 
 use Closure;
-use InvalidArgumentException;
 use Illuminate\Support\Str;
+use InvalidArgumentException;
 
 abstract class Manager
 {
-
     /**
      * The configuration repository instance.
      *
@@ -72,7 +71,7 @@ abstract class Manager
         // If the given driver has not been created before, we will create the instances
         // here and cache it so we can return it next time very quickly. If there is
         // already a driver created by this name, we'll just return that instance.
-        if (!isset($this->drivers[$driver])) {
+        if (! isset($this->drivers[$driver])) {
             $this->drivers[$driver] = $this->createDriver($driver);
         }
 
@@ -96,7 +95,7 @@ abstract class Manager
             return $this->callCustomCreator($driver);
         }
 
-        $method = 'create' . Str::studly($driver) . 'Driver';
+        $method = 'create'.Str::studly($driver).'Driver';
 
         if (method_exists($this, $method)) {
             return $this->$method();
@@ -120,7 +119,6 @@ abstract class Manager
      * Register a custom driver creator Closure.
      *
      * @param  string  $driver
-     * @param  \Closure  $callback
      * @return $this
      */
     public function extend($driver, Closure $callback)

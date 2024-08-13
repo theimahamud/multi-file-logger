@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Rubel9997\MultiFileLogger\Loggers;
 
-use Rubel9997\MultiFileLogger\Loggers\AbstractLogger;
 use PDO;
 
 class DatabaseLogger extends AbstractLogger
 {
     protected $pdo;
+
     protected $tableName;
 
     public function __construct(PDO $pdo, string $tableName)
@@ -27,7 +27,7 @@ class DatabaseLogger extends AbstractLogger
             ':level' => $level,
             ':message' => $message,
             ':context' => json_encode($context),
-            ':timestamp' => date('Y-m-d H:i:s')
+            ':timestamp' => date('Y-m-d H:i:s'),
         ]);
     }
 }

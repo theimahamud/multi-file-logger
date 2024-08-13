@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Rubel9997\MultiFileLogger\Loggers;
 
-use Rubel9997\MultiFileLogger\Loggers\AbstractLogger;
-
 class StreamLogger extends AbstractLogger
 {
     protected $stream;
@@ -13,7 +11,7 @@ class StreamLogger extends AbstractLogger
     public function __construct(string $stream)
     {
         $this->stream = @fopen($stream, 'w');
-        if (!$this->stream) {
+        if (! $this->stream) {
             throw new \InvalidArgumentException("Unable to open stream: {$stream}");
         }
     }

@@ -6,27 +6,27 @@ use PDO;
 
 class LogManager extends Manager
 {
-    function getDefaultDriver()
+    public function getDefaultDriver()
     {
         return 'textFile';
     }
 
-    function createStreamDriver(): LoggerInterface
+    public function createStreamDriver(): LoggerInterface
     {
         return new StreamLogger($this->config['stream']['path']);
     }
 
-    function createTextFileDriver(): LoggerInterface
+    public function createTextFileDriver(): LoggerInterface
     {
         return new TextFileLogger($this->config['text']['path']);
     }
 
-    function createJsonFileDriver(): LoggerInterface
+    public function createJsonFileDriver(): LoggerInterface
     {
         return new JsonFileLogger($this->config['json']['path']);
     }
 
-    function createDatabaseDriver(): LoggerInterface
+    public function createDatabaseDriver(): LoggerInterface
     {
         $db = $this->config['database']['database'];
         $username = $this->config['database']['username'];
