@@ -1,46 +1,66 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "rubel9997/multi-file-logger",
+    "description": "This is my package multi-file-logger",
     "keywords": [
-        ":vendor_name",
-        ":package_slug"
+        "rubel9997",
+        "multi-file-logger"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/rubel9997/multi-file-logger",
     "license": "MIT",
+    "repositories": {
+        "local": {
+            "type": "path",
+            "url": "./package/*",
+            "options": {
+                "symlink": true
+            }
+        }
+    },
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Rubel Mahamud",
+            "email": "rubelmahamud9997@gmail.com",
             "role": "Developer"
         }
     ],
     "require": {
-        "php": "^8.1"
+        "php": "^8.1",
+        "illuminate/support": "^11.20"
     },
     "require-dev": {
-        :require_dev_testing,
-        :require_dev_codestyle,
+        "phpunit/phpunit": "^10.3.2",
+        "laravel/pint": "^1.0",
         "spatie/ray": "^1.28"
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src"
+            "Rubel9997\\MultiFileLogger\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "Rubel9997\\MultiFileLogger\\Tests\\": "tests"
         }
     },
     "scripts": {
-        :scripts_testing,
-        :scripts_codestyle
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage",
+        "format": "vendor/bin/pint"
     },
     "config": {
         "sort-packages": true,
         "allow-plugins": {
-            :plugins_testing,
             "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Rubel9997\\MultiFileLogger\\Loggers\\LoggerServiceProvider"
+            ],
+            "aliases": {
+                "Logger": "Rubel9997\\MultiFileLogger\\Loggers\\Facades\\LogFacade"
+            }
         }
     },
     "minimum-stability": "dev",
