@@ -10,8 +10,7 @@ class LoggerServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../../config/logger.php', 'logger');
-
+        $this->mergeConfigFrom(__DIR__.'/../../config/logger.php', 'logger');
 
         $bindLogManager = function ($app) {
             return new LogManager($app['config']['logger']['drivers']);
@@ -25,12 +24,12 @@ class LoggerServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../../config/logger.php' => config_path('logger.php'),
+            __DIR__.'/../../config/logger.php' => config_path('logger.php'),
         ], 'logger-config');
 
         $timestamp = date('Y_m_d_His');
         $this->publishes([
-            __DIR__ . '/../../database/migrations/create_logs_table.php' => database_path('migrations/' . $timestamp . '_create_logs_table.php'),
+            __DIR__.'/../../database/migrations/create_logs_table.php' => database_path('migrations/'.$timestamp.'_create_logs_table.php'),
         ], 'logger-migration');
     }
 }
