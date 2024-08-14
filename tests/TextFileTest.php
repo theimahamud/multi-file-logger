@@ -33,7 +33,7 @@ class TextFileTest extends TestCase
 
         $level = 'info';
         $message = 'Test log message';
-        $context = ['username' => "TestUser"];
+        $context = ['username' => 'TestUser'];
 
         // Act
         $logger->log($level, $message, $context);

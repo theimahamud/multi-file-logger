@@ -27,32 +27,32 @@ class JsonFileTest extends TestCase
 
     public function test_log_store_json_file(): void
     {
-       // Create instance and pass temp file path
-       $logger = new JsonFileLogger($this->tempFile);
+        // Create instance and pass temp file path
+        $logger = new JsonFileLogger($this->tempFile);
 
-       $logger->log('info', 'Test log message', ['username' => 'TestUser']);
+        $logger->log('info', 'Test log message', ['username' => 'TestUser']);
 
-       // get the contents
-       $logContent = file_get_contents($this->tempFile);
-       $logEntries = json_decode($logContent, true);
+        // get the contents
+        $logContent = file_get_contents($this->tempFile);
+        $logEntries = json_decode($logContent, true);
 
-       // Assert
-       $this->assertIsArray($logEntries);
-       $this->assertCount(1, $logEntries);
+        // Assert
+        $this->assertIsArray($logEntries);
+        $this->assertCount(1, $logEntries);
 
-       // Verify the log entry content
-       $this->assertEquals('info', $logEntries[0]['level']);
-       $this->assertEquals('Test log message', $logEntries[0]['message']);
-       $this->assertEquals(['username' => 'TestUser'], $logEntries[0]['context']);
+        // Verify the log entry content
+        $this->assertEquals('info', $logEntries[0]['level']);
+        $this->assertEquals('Test log message', $logEntries[0]['message']);
+        $this->assertEquals(['username' => 'TestUser'], $logEntries[0]['context']);
     }
 
     public function test_log_appends_to_json_file(): void
     {
-       // Create instance and pass temp file path
+        // Create instance and pass temp file path
         $logger = new JsonFileLogger($this->tempFile);
 
-        $logger->log('info', 'First log message',['username' => 'TestUser1']);
-        $logger->log('error', 'Second log message',['username' => 'TestUser2']);
+        $logger->log('info', 'First log message', ['username' => 'TestUser1']);
+        $logger->log('error', 'Second log message', ['username' => 'TestUser2']);
 
         // get the contents
         $logContent = file_get_contents($this->tempFile);
