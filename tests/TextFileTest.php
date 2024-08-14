@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Rubel9997\MultiFileLogger\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Rubel9997\MultiFileLogger\Loggers\TextFileLogger;
+use Rubel9997\MultiFileLogger\Loggers\LogManager;
 
 class TextFileTest extends TestCase
 {
@@ -29,14 +29,14 @@ class TextFileTest extends TestCase
     {
         // Arrange
         //Create an instance of StreamLogger and pass temp path
-        $logger = new TextFileLogger($this->testLogFile);
+        $logger = new LogManager(['text' => ['path' => $this->testLogFile]]);
 
         $level = 'info';
         $message = 'Test log message';
         $context = ['username' => "TestUser"];
 
         // Act
-        $logger->log($level, $message, $context);
+        $logger->driver('textFile')->log($level, $message, $context);
 
         // Assert
         $this->assertFileExists($this->testLogFile);

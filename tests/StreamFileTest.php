@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Rubel9997\MultiFileLogger\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Rubel9997\MultiFileLogger\Loggers\StreamLogger;
+use Rubel9997\MultiFileLogger\Loggers\LogManager;
 
 class StreamFileTest extends TestCase
 {
@@ -28,9 +28,9 @@ class StreamFileTest extends TestCase
     public function test_log_store_to_stream_(): void
     {
         // Create an instance of StreamLogger and pass temp path
-        $logger = new StreamLogger($this->tempFile);
+        $logger = new LogManager(['stream' => ['path' => $this->tempFile]]);
 
-        $logger->log('info', 'Test stream log message', ['user' => 'Test']);
+        $logger->driver('stream')->log('info', 'Test stream log message', ['user' => 'Test']);
 
         // Read the contents from the file
         $logContent = file_get_contents($this->tempFile);

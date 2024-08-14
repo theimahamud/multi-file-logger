@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Rubel9997\MultiFileLogger\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Rubel9997\MultiFileLogger\Loggers\JsonFileLogger;
+use Rubel9997\MultiFileLogger\Loggers\LogManager;
 
 class JsonFileTest extends TestCase
 {
@@ -28,9 +28,9 @@ class JsonFileTest extends TestCase
     public function test_log_store_json_file(): void
     {
        // Create instance and pass temp file path
-       $logger = new JsonFileLogger($this->tempFile);
+       $logger = new LogManager(['json' => ['path' => $this->tempFile]]);
 
-       $logger->log('info', 'Test log message', ['username' => 'TestUser']);
+       $logger->driver('jsonFile')->log('info', 'Test log message', ['username' => 'TestUser']);
 
        // get the contents
        $logContent = file_get_contents($this->tempFile);
@@ -49,10 +49,10 @@ class JsonFileTest extends TestCase
     public function test_log_appends_to_json_file(): void
     {
        // Create instance and pass temp file path
-        $logger = new JsonFileLogger($this->tempFile);
+        $logger = new LogManager(['json' => ['path' => $this->tempFile]]);
 
-        $logger->log('info', 'First log message',['username' => 'TestUser1']);
-        $logger->log('error', 'Second log message',['username' => 'TestUser2']);
+        $logger->driver('jsonFile')->log('info', 'First log message',['username' => 'TestUser1']);
+        $logger->driver('jsonFile')->log('error', 'Second log message',['username' => 'TestUser2']);
 
         // get the contents
         $logContent = file_get_contents($this->tempFile);
