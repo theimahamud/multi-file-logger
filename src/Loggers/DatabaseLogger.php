@@ -20,11 +20,6 @@ class DatabaseLogger extends AbstractLogger
 
     /**
      * Log a message to the database with the specified level, message, and context.
-     *
-     * @param string $level
-     * @param string $message
-     * @param array $context
-     * @return void
      */
     public function log(string $level, string $message, array $context = []): void
     {

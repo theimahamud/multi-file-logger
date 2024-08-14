@@ -9,7 +9,6 @@ use Rubel9997\MultiFileLogger\Loggers\LogManager;
 
 class LogFacade extends Facade
 {
-
     /**
      * Get the service container key for the 'log-manager'.
      *

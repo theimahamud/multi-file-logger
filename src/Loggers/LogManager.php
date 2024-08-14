@@ -20,8 +20,6 @@ class LogManager extends Manager
 
     /**
      * Create and return a StreamLogger instance.
-     *
-     * @return LoggerInterface
      */
     public function createStreamDriver(): LoggerInterface
     {
@@ -30,8 +28,6 @@ class LogManager extends Manager
 
     /**
      * Create and return a TextFileLogger instance.
-     *
-     * @return LoggerInterface
      */
     public function createTextFileDriver(): LoggerInterface
     {
@@ -40,8 +36,6 @@ class LogManager extends Manager
 
     /**
      * Create and return a JsonFileLogger instance.
-     *
-     * @return LoggerInterface
      */
     public function createJsonFileDriver(): LoggerInterface
     {
@@ -50,8 +44,6 @@ class LogManager extends Manager
 
     /**
      * Create and return a DatabaseLogger instance.
-     *
-     * @return LoggerInterface
      */
     public function createDatabaseDriver(): LoggerInterface
     {

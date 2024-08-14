@@ -15,10 +15,6 @@ class TextFileLogger extends AbstractLogger
 
     /**
      * Log a message to the text file with the specified level and context.
-     *
-     * @param string $level
-     * @param string $message
-     * @param array $context
      */
     public function log(string $level, string $message, array $context = []): void
     {

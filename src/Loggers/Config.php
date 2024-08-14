@@ -23,8 +23,6 @@ class Config
 
     /**
      * Get the URI path.
-     *
-     * @return string
      */
     public function getPath(): string
     {

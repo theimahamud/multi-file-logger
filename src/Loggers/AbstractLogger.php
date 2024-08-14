@@ -8,11 +8,6 @@ abstract class AbstractLogger implements LoggerInterface
 {
     /**
      * Format the log message with a timestamp, level, message, and context.
-     *
-     * @param string $level
-     * @param string $message
-     * @param array $context
-     * @return string
      */
     protected function formatMessage(string $level, string $message, array $context = []): string
     {
