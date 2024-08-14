@@ -74,6 +74,9 @@ php artisan vendor:publish --provider="Rubel9997\MultiFileLogger\Loggers\LoggerS
 ```
 
 ## Database Setup
+
+Please use a MySQL database connection for testing.
+
 ```php
 php artisan vendor:publish --provider="Rubel9997\MultiFileLogger\Loggers\LoggerServiceProvider" --tag="logger-migration"
 php artisan migrate
