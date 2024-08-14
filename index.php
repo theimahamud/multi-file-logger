@@ -9,6 +9,8 @@ $manager = new LogManager([
     'stream' => ['path' => 'php://stdout'],
     'json' => ['path' => 'logs/json-log.json'],
     'database' => [
+        'connection' => 'mysql',
+        'host' => '127.0.0.1',
         'database' => 'logger',
         'username' => 'root',
         'password' => '',

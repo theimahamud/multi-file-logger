@@ -51,6 +51,8 @@ $manager->driver('stream')->log('info', 'This is a log message to stdout.');
 // Log messages to database
 $manager = new LogManager([
     'database' => [
+        'connection' => 'mysql',
+        'host' => '127.0.0.1',
         'database' => 'logger',
         'username' => 'root',
         'password' => '',
