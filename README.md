@@ -36,20 +36,10 @@ use Rubel9997\MultiFileLogger\Loggers\LogManager;
 
 // Log messages to different channels
 
-// Log messages to text file
-$manager = new LogManager(['text' => ['path' => 'logs/text-log.txt']]);
-$manager->driver('textFile')->log('info', 'This is a log message in a text file.');
-
-// Log messages to json file
-$manager = new LogManager(['json' => ['path' => 'logs/json-log.json']]);
-$manager->driver('jsonFile')->log('info', 'This is a log message in JSON format.');
-
-// Log messages to stream
-$manager = new LogManager(['stream' => ['path' => 'php://stdout']]);
-$manager->driver('stream')->log('info', 'This is a log message to stdout.');
-
-// Log messages to database
 $manager = new LogManager([
+    'text' => ['path' => 'logs/text-log.txt'],
+    'json' => ['path' => 'logs/json-log.json'],
+    'stream' => ['path' => 'php://stdout'],
     'database' => [
         'connection' => 'mysql',
         'host' => '127.0.0.1',
@@ -59,6 +49,17 @@ $manager = new LogManager([
         'table' => 'logs',
     ]
 ]);
+
+// Log messages to text file
+$manager->driver('textFile')->log('info', 'This is a log message in a text file.');
+
+// Log messages to json file
+$manager->driver('jsonFile')->log('info', 'This is a log message in JSON format.');
+
+// Log messages to stream
+$manager->driver('stream')->log('info', 'This is a log message to stdout.');
+
+// Log messages to database
 $manager->driver('database')->log('info', 'This is a log message stored in the database.');
 ```
 
