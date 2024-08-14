@@ -6,7 +6,8 @@
 
 Multi-File Logger is a versatile PHP package designed to handle logging across multiple channels and formats. It provides a flexible logging solution that supports various logging mediums, including text files, JSON files, and databases.
 This package is ideal for projects that require extensive logging capabilities, enabling you to manage and store logs in different formats and locations efficiently.
-## Installation For PHP 
+
+## Installation For PHP
 
 You can install the package via composer:
 
@@ -21,7 +22,7 @@ First, create a logs table in your database using the following SQL statement:
 ```php
 CREATE TABLE logs (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    level VARCHAR(20),
+    level VARCHAR(100),
     message TEXT,
     context JSON,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -33,22 +34,29 @@ CREATE TABLE logs (
 ```php
 use Rubel9997\MultiFileLogger\Loggers\LogManager;
 
+// Log messages to different channels
+
+// Log messages to text file
+$manager = new LogManager(['text' => ['path' => 'logs/text-log.txt']]);
+$manager->driver('textFile')->log('info', 'This is a log message in a text file.');
+
+// Log messages to json file
+$manager = new LogManager(['json' => ['path' => 'logs/json-log.json']]);
+$manager->driver('jsonFile')->log('info', 'This is a log message in JSON format.');
+
+// Log messages to stream
+$manager = new LogManager(['stream' => ['path' => 'php://stdout']]);
+$manager->driver('stream')->log('info', 'This is a log message to stdout.');
+
+// Log messages to database
 $manager = new LogManager([
-    'text' => ['path' => 'logs/text-log.txt'],
-    'stream' => ['path' => 'php://stdout'],
-    'json' => ['path' => 'logs/json-log.json'],
     'database' => [
         'database' => 'logger',
         'username' => 'root',
         'password' => '',
         'table' => 'logs',
-    ],
+    ]
 ]);
-
-// Log messages to different channels
-$manager->driver('textFile')->log('info', 'This is a log message in a text file.');
-$manager->driver('jsonFile')->log('info', 'This is a log message in JSON format.');
-$manager->driver('stream')->log('info', 'This is a log message to stdout.');
 $manager->driver('database')->log('info', 'This is a log message stored in the database.');
 ```
 
@@ -58,7 +66,7 @@ $manager->driver('database')->log('info', 'This is a log message stored in the d
 composer test
 ``` -->
 
-## Installation For Laravel 
+## Installation For Laravel
 
 You can install the package via Composer:
 
@@ -107,8 +115,8 @@ $manager->driver('database')->log('info', 'Log Message store.');
 
 ## Credits
 
-- [Rubel Mahamud](https://github.com/rubel9997)
-- [All Contributors](../../contributors)
+-   [Rubel Mahamud](https://github.com/rubel9997)
+-   [All Contributors](../../contributors)
 
 ## License
 
