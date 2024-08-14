@@ -32,18 +32,18 @@ class JsonFileTest extends TestCase
 
        $logger->driver('jsonFile')->log('info', 'Test log message', ['username' => 'TestUser']);
 
-       // get the contents
-       $logContent = file_get_contents($this->tempFile);
-       $logEntries = json_decode($logContent, true);
+        // get the contents
+        $logContent = file_get_contents($this->tempFile);
+        $logEntries = json_decode($logContent, true);
 
-       // Assert
-       $this->assertIsArray($logEntries);
-       $this->assertCount(1, $logEntries);
+        // Assert
+        $this->assertIsArray($logEntries);
+        $this->assertCount(1, $logEntries);
 
-       // Verify the log entry content
-       $this->assertEquals('info', $logEntries[0]['level']);
-       $this->assertEquals('Test log message', $logEntries[0]['message']);
-       $this->assertEquals(['username' => 'TestUser'], $logEntries[0]['context']);
+        // Verify the log entry content
+        $this->assertEquals('info', $logEntries[0]['level']);
+        $this->assertEquals('Test log message', $logEntries[0]['message']);
+        $this->assertEquals(['username' => 'TestUser'], $logEntries[0]['context']);
     }
 
     public function test_log_appends_to_json_file(): void
