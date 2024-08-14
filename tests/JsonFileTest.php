@@ -27,10 +27,10 @@ class JsonFileTest extends TestCase
 
     public function test_log_store_json_file(): void
     {
-       // Create instance and pass temp file path
-       $logger = new LogManager(['json' => ['path' => $this->tempFile]]);
+        // Create instance and pass temp file path
+        $logger = new LogManager(['json' => ['path' => $this->tempFile]]);
 
-       $logger->driver('jsonFile')->log('info', 'Test log message', ['username' => 'TestUser']);
+        $logger->driver('jsonFile')->log('info', 'Test log message', ['username' => 'TestUser']);
 
         // get the contents
         $logContent = file_get_contents($this->tempFile);
@@ -48,11 +48,11 @@ class JsonFileTest extends TestCase
 
     public function test_log_appends_to_json_file(): void
     {
-       // Create instance and pass temp file path
+        // Create instance and pass temp file path
         $logger = new LogManager(['json' => ['path' => $this->tempFile]]);
 
-        $logger->driver('jsonFile')->log('info', 'First log message',['username' => 'TestUser1']);
-        $logger->driver('jsonFile')->log('error', 'Second log message',['username' => 'TestUser2']);
+        $logger->driver('jsonFile')->log('info', 'First log message', ['username' => 'TestUser1']);
+        $logger->driver('jsonFile')->log('error', 'Second log message', ['username' => 'TestUser2']);
 
         // get the contents
         $logContent = file_get_contents($this->tempFile);
