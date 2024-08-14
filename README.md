@@ -33,18 +33,12 @@ CREATE TABLE logs (
 ```php
 use Rubel9997\MultiFileLogger\Loggers\LogManager;
 
-// Load the configuration
-//$config = require __DIR__ . '/config/logger.php';
-
-// Instantiate the LogManager
-//$manager = new LogManager($config);
-
 $manager = new LogManager([
     'text' => ['path' => 'logs/text-log.txt'],
     'stream' => ['path' => 'php://stdout'],
     'json' => ['path' => 'logs/json-log.json'],
     'database' => [
-        'db' => 'logger',
+        'database' => 'logger',
         'username' => 'root',
         'password' => '',
         'table' => 'logs',
@@ -58,11 +52,11 @@ $manager->driver('stream')->log('info', 'This is a log message to stdout.');
 $manager->driver('database')->log('info', 'This is a log message stored in the database.');
 ```
 
-## Testing
+<!-- ## Testing
 
 ```bash
 composer test
-```
+``` -->
 
 ## Installation For Laravel 
 
@@ -91,8 +85,14 @@ php artisan migrate
 use Rubel9997\MultiFileLogger\Loggers\LogManager;
 use Rubel9997\MultiFileLogger\Loggers\Facades\LogFacade;
 
-//use facade for store log
+//use facade for store log with default driver
 LogFacade::log('info', 'facade log');
+
+// use multiple driver to store log
+LogFacade::driver('textFile')->log('info', 'Facade: Log Message stored in text file.');
+LogFacade::driver('jsonFile')->log('info', 'Facade: Log Message stored in JSON file.');
+LogFacade::driver('stream')->log('info', 'Facade: Log Message stored in stream.');
+LogFacade::driver('database')->log('info', 'Facade: Log Message stored in database.');
 
 //use LogManager class for store log
 $manager = app(LogManager::class);
@@ -101,7 +101,6 @@ $manager->driver('jsonFile')->log('info', 'Log Message store.');
 $manager->driver('stream')->log('info', 'Log Message store.');
 $manager->driver('database')->log('info', 'Log Message store.');
 ```
-
 
 ## Credits
 

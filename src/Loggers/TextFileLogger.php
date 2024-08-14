@@ -13,6 +13,13 @@ class TextFileLogger extends AbstractLogger
         $this->filePath = $filePath;
     }
 
+    /**
+     * Log a message to the text file with the specified level and context.
+     *
+     * @param string $level
+     * @param string $message
+     * @param array $context
+     */
     public function log(string $level, string $message, array $context = []): void
     {
         $formattedMessage = $this->formatMessage($level, $message, $context);

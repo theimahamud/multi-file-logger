@@ -21,11 +21,21 @@ class Config
         $this->password = $password;
     }
 
+    /**
+     * Get the URI path.
+     *
+     * @return string
+     */
     public function getPath(): string
     {
         return $this->uri;
     }
 
+    /**
+     * Create and return a new PDO instance with the provided configuration.
+     *
+     * @return PDO
+     */
     public function getPDO()
     {
         return new PDO($this->uri, $this->username, $this->password, [

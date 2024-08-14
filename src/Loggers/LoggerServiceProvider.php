@@ -8,6 +8,11 @@ use Illuminate\Support\ServiceProvider;
 
 class LoggerServiceProvider extends ServiceProvider
 {
+    /**
+     * Register the service provider bindings and configurations.
+     *
+     * @return void
+     */
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/../../config/logger.php', 'logger');
@@ -16,11 +21,15 @@ class LoggerServiceProvider extends ServiceProvider
             return new LogManager($app['config']['logger']['drivers']);
         };
 
-        $this->app->singleton('log-manager', $bindLogManager);
-
+        $this->app->singleton(LogManager::class, $bindLogManager);
         $this->app->bind(LogManager::class, $bindLogManager);
     }
 
+    /**
+     * Publish configuration and migration files.
+     *
+     * @return void
+     */
     public function boot()
     {
         $this->publishes([

@@ -13,6 +13,14 @@ class JsonFileLogger extends AbstractLogger
         $this->filePath = $filePath;
     }
 
+    /**
+     * Log a message to a JSON file with the specified level, message, and context.
+     *
+     * @param string $level
+     * @param string $message
+     * @param array $context
+     * @return void
+     */
     public function log(string $level, string $message, array $context = []): void
     {
         $logEntry = [
@@ -21,6 +29,35 @@ class JsonFileLogger extends AbstractLogger
             'message' => $message,
             'context' => $context,
         ];
-        file_put_contents($this->filePath, json_encode($logEntry)."\n", FILE_APPEND);
+
+        file_put_contents($this->filePath, json_encode($this->addMessage($logEntry), JSON_PRETTY_PRINT));
+    }
+
+    /**
+     * Add a new log entry to the existing log entries.
+     *
+     * @param array $log
+     * @return array
+     */
+    private function addMessage(array $log): array
+    {
+        $previousLogs = $this->getPreviousLog();
+        $previousLogs[] = $log;
+        return $previousLogs;
+    }
+
+    /**
+     * Retrieve previous log entries from the JSON file.
+     *
+     * @return array
+     */
+    private function getPreviousLog(): array
+    {
+        if (!file_exists($this->filePath)) {
+            return [];
+        }
+
+        $content = file_get_contents($this->filePath);
+        return json_decode($content, true) ?? [];
     }
 }

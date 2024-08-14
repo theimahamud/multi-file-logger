@@ -18,16 +18,23 @@ class DatabaseLogger extends AbstractLogger
         $this->tableName = $tableName;
     }
 
+    /**
+     * Log a message to the database with the specified level, message, and context.
+     *
+     * @param string $level
+     * @param string $message
+     * @param array $context
+     * @return void
+     */
     public function log(string $level, string $message, array $context = []): void
     {
-        $stmt = $this->pdo->prepare(
-            "INSERT INTO {$this->tableName} (level, message, context, timestamp) VALUES (:level, :message, :context, :timestamp)"
-        );
+        $stmt = $this->pdo->prepare("INSERT INTO {$this->tableName} (level, message, context, created_at) VALUES (:level, :message, :context, :created_at)");
+
         $stmt->execute([
             ':level' => $level,
             ':message' => $message,
             ':context' => json_encode($context),
-            ':timestamp' => date('Y-m-d H:i:s'),
+            ':created_at' => date('Y-m-d H:i:s'),
         ]);
     }
 }
