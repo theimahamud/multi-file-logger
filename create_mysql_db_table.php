@@ -13,7 +13,7 @@ try {
     //echo "Connected to MySQL successfully!<br>";
 
     // SQL to create table
-    $sql = "
+    $sql = '
         CREATE TABLE IF NOT EXISTS logs (
             id INT AUTO_INCREMENT PRIMARY KEY,
             level VARCHAR(50) NOT NULL,
@@ -21,14 +21,12 @@ try {
             context TEXT,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
-    ";
+    ';
 
     // Execute the query
     $pdo->exec($sql);
-    echo "Logs table created successfully!";
+    echo 'Logs table created successfully!';
 
 } catch (PDOException $e) {
-    die("Error: " . $e->getMessage());
+    exit('Error: '.$e->getMessage());
 }
-
-?>

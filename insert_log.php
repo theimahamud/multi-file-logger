@@ -4,8 +4,8 @@ require 'vendor/autoload.php';
 
 use Rubel9997\MultiFileLogger\Loggers\LogManager;
 
-$databasePath = __DIR__ . '/database/database.sqlite';
-if (!file_exists($databasePath)) {
+$databasePath = __DIR__.'/database/database.sqlite';
+if (! file_exists($databasePath)) {
     touch($databasePath);
 }
 

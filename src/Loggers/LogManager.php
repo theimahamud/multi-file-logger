@@ -79,7 +79,7 @@ class LogManager extends Manager
                         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                     ]);
                 } else {
-                    throw new \InvalidArgumentException("MySQL configuration is missing.");
+                    throw new \InvalidArgumentException('MySQL configuration is missing.');
                 }
                 break;
         }
