@@ -48,21 +48,41 @@ class LogManager extends Manager
     public function createDatabaseDriver(): LoggerInterface
     {
         $config = $this->config['database'];
-
         $connection = $config['connection'] ?? 'mysql';
-        $host = $config['host'] ?? '127.0.0.1';
-        $port = $config['port'] ?? '3306';
-        $database = $config['database'] ?? 'logger';
-        $username = $config['username'] ?? 'root';
-        $password = $config['password'] ?? '';
         $table = $config['table'] ?? 'logs';
 
-        $dsn = "{$connection}:host={$host};port={$port};dbname={$database};charset=utf8mb4";
+        switch ($connection) {
+            case 'sqlite':
+                if (isset($config['sqlite']['database'])) {
+                    $dsn = "sqlite:{$config['sqlite']['database']}";
+                    $pdo = new PDO($dsn, null, null, [
+                        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    ]);
+                } else {
+                    throw new \InvalidArgumentException("SQLite configuration is missing 'database' key.");
+                }
+                break;
 
-        $pdo = new PDO($dsn, $username, $password, [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        ]);
+            case 'mysql':
+            default:
+                if (isset($config['mysql'])) {
+                    $host = $config['mysql']['host'] ?? '127.0.0.1';
+                    $port = $config['mysql']['port'] ?? '3306';
+                    $database = $config['mysql']['database'] ?? 'logger';
+                    $username = $config['mysql']['username'] ?? 'root';
+                    $password = $config['mysql']['password'] ?? '';
+
+                    $dsn = "mysql:host={$host};port={$port};dbname={$database};charset=utf8mb4";
+                    $pdo = new PDO($dsn, $username, $password, [
+                        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    ]);
+                } else {
+                    throw new \InvalidArgumentException("MySQL configuration is missing.");
+                }
+                break;
+        }
 
         return new DatabaseLogger($pdo, $table);
     }
