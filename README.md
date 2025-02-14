@@ -1,8 +1,4 @@
-# This is a multi-file-logger package
-
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/rubel9997/multi-file-logger.svg?style=flat-square)](https://packagist.org/packages/rubel9997/multi-file-logger)
-[![Tests](https://img.shields.io/github/actions/workflow/status/rubel9997/multi-file-logger/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/rubel9997/multi-file-logger/actions/workflows/run-tests.yml)
-[![Total Downloads](https://img.shields.io/packagist/dt/rubel9997/multi-file-logger.svg?style=flat-square)](https://packagist.org/packages/rubel9997/multi-file-logger)
+# Multi-file-logger package
 
 Multi-File Logger is a versatile PHP package designed to handle logging across multiple channels and formats. It provides a flexible logging solution that supports various logging mediums, including text files, JSON files, and databases.
 This package is ideal for projects that require extensive logging capabilities, enabling you to manage and store logs in different formats and locations efficiently.
@@ -12,7 +8,7 @@ This package is ideal for projects that require extensive logging capabilities, 
 You can install the package via composer:
 
 ```bash
-composer require rubel9997/multi-file-logger
+composer require theimahamud/multi-file-logger
 ```
 
 ## Database Setup
@@ -74,7 +70,7 @@ composer test
 You can install the package via Composer:
 
 ```bash
-composer require rubel9997/multi-file-logger
+composer require theimahamud/multi-file-logger
 ```
 
 After installing the package, you can publish the configuration file to customize the logging channels:
@@ -118,7 +114,7 @@ $manager->driver('database')->log('info', 'Log Message store.');
 
 ## Credits
 
--   [Rubel Mahamud](https://github.com/rubel9997)
+-   [Rubel Mahamud](https://github.com/theimahamud)
 -   [All Contributors](../../contributors)
 
 ## License
